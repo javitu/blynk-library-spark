@@ -61,6 +61,9 @@ struct BlynkHeader
 BLYNK_ATTR_PACKED;
 
 #if defined(ARDUINO) || defined(ESP8266) || defined(PARTICLE) || defined(MBED_LIBRARY_VERSION)
+    #if defined(HTONS)
+        #undef HTONS
+    #endif
     #if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
         #define htons(x) ( ((x)<<8) | (((x)>>8)&0xFF) )
         #define htonl(x) ( ((x)<<24 & 0xFF000000UL) | \
